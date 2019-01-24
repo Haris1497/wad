@@ -1,13 +1,16 @@
 <?php
 require_once "db_connection.php";
-if(isset($_GET['insert_pro'])){
-//getting text data from the fields
-$c_title = $_GET['cat_title'];
-$insert_product = "insert into categories (cat_title) VALUES ('$c_title');";
-$insert_pro = mysqli_query($con, $insert_product);
-if($insert_pro){
-header("location: ".$_SERVER['PHP_SELF']);
+if(!isset($_SESSION['user_email'])){
+    header('location: login.php?not_admin=You are not Admin!');
 }
+if(isset($_GET['insert_pro'])){
+    //getting text data from the fields
+    $c_title = $_GET['cat_title'];
+    $insert_product = "insert into categories (cat_title) VALUES ('$c_title');";
+    $insert_pro = mysqli_query($con, $insert_product);
+    if($insert_pro){
+        header("location: ".$_SERVER['PHP_SELF']);
+    }
 }
 ?>
 <!DOCTYPE html>
